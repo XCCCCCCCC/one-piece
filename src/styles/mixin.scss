@@ -1,0 +1,145 @@
+// text font-size & line-height
+@mixin text-size($size: 12px, $height: 18px) {
+  font-size: $size;
+  line-height: $height;
+}
+
+@mixin text-ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-ellipsis-multi($line) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+@mixin flex-center($direction: both) {
+  display: flex;
+  @if $direction==both {
+    justify-content: center;
+    align-items: center;
+  } @else if $direction==x {
+    justify-content: center;
+  } @else if $direction==y {
+    align-items: center;
+  }
+}
+
+@mixin box-shadow {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+@mixin img-wrap($width, $height: $width) {
+  width: $width;
+  height: $height;
+  flex-shrink: 0;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin abs-stretch {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+}
+
+@mixin abs-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin round($d) {
+  width: $d;
+  height: $d;
+  border-radius: 50%;
+}
+
+@mixin list($item-width) {
+  .list-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -12px;
+
+    .list-item {
+      width: $item-width;
+      margin-bottom: 36px;
+      padding: 0 12px;
+    }
+  }
+}
+
+@mixin clear-fix() {
+  &:after {
+    content: '';
+    clear: both;
+  }
+}
+@mixin bg-auto() {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+@mixin primary-btn() {
+  @include flex-center();
+  border-radius: 4px;
+  background-color: $color-main;
+  @include text-size(14px, 20px);
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-main-hover;
+  }
+  &.disabled {
+    background-color: rgba($color: $color-main, $alpha: 0.5);
+    cursor: not-allowed;
+  }
+}
+@mixin primary-btn-text() {
+  @include text-size(14px, 20px);
+  color: $color-main;
+  cursor: pointer;
+  &:hover {
+    color: $color-main-hover;
+  }
+}
+@mixin primary-btn-white() {
+  @include flex-center();
+  border-radius: 4px;
+  background-color: $color-main;
+  @include text-size(14px, 20px);
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-main-hover;
+  }
+}
+@mixin primary-btn-plain() {
+  @include flex-center();
+  border: 1px solid $color-main;
+  border-radius: 4px;
+  @include text-size(14px, 20px);
+  color: $color-main;
+  cursor: pointer;
+  &:hover {
+    border-color: $color-main-hover;
+    color: $color-main-hover;
+  }
+  &.disabled {
+    background-color: rgba($color: #fff, $alpha: 0.5);
+    cursor: not-allowed;
+  }
+}
+@mixin clear-font-size() {
+  font-size: 0;
+}

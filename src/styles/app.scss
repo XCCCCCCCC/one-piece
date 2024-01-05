@@ -1,0 +1,17 @@
+html,
+body,
+#app {
+  height: 100%;
+  background-color: $color-bg;
+}
+#app {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', STHeiti,
+    'Microsoft Yahei', Tahoma, Simsun, sans-serif;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+  font-family: 'Run';
+  src: url('@/assets/fonts/CGTriumvirate-Compressed.ttf');
+}
