@@ -16,6 +16,7 @@ const handleButtonClick = () => {
       <!-- {{ $t('test') }} -->
     </h3>
     <button @click="handleButtonClick">切换</button>
+    helloworld
   </div>
 </template>
 

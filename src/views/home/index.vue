@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 onMounted(() => {
-  ;(<any>load)('192.168.68.63')
+  // ;(<any>load)('192.168.68.63')
 })
 </script>
 

@@ -1,12 +1,43 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import { defineAsyncComponent, ref } from 'vue'
+import LoadingC from '@/components/Loading.vue'
+import useMy from '@/hooks/web/useMouse'
+const showName = ref(false)
+const { x, y } = useMy()
+const toggle = ref(false)
+const nameKey = ref(1)
+const NewComp = defineAsyncComponent({
+  loader: () => import('@/components/HelloWorld.vue'),
+  loadingComponent: LoadingC,
+  delay: 2000
+})
+const vFocus = {
+  mounted(e, binding) {
+    e.focus()
+    console.log(binding)
+    e.style.color = binding.value
+  }
+}
 </script>
 
 <template>
   <header>
+    <!-- <Transition name="fade">
+      <div>{{ $myT('cn.person.name') }}</div>
+    </Transition> -->
+    <Transition name="b">
+      <div v-show="showName">{{ $myT('cn.person.name') }}</div>
+    </Transition>
+    <input type="text" v-focus:foo="`red`" />
+    <!-- <div class="mouse">{{ x }} , {{ y }}</div> -->
     <div class="wrapper">
-      <HelloWorld msg="123" />
+      <NewComp msg="123" />
+      <!-- <LoadingC /> -->
+      <button @click="toggle = !toggle">go</button>
+      <button @click="showName = !showName">toggle</button>
+      <button @click="nameKey++">addkey</button>
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -17,6 +48,40 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateX(-20px);
+  visibility: hidden;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+.b-enter-active {
+  animation: fangda 5s;
+}
+
+.b-leave-active {
+  animation: fangda 2s reverse;
+}
+
+@keyframes fangda {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
