@@ -20,14 +20,20 @@ const vFocus = {
     e.style.color = binding.value
   }
 }
+function handleBeforEnter(...args) {
+  console.log(args)
+}
+function handleAfterLeave(...args) {
+  console.log(args)
+}
 </script>
 
 <template>
   <header>
-    <!-- <Transition name="fade">
-      <div>{{ $myT('cn.person.name') }}</div>
-    </Transition> -->
-    <Transition name="b">
+    <Transition name="fade" mode="out-in">
+      <div :key="nameKey">{{ $myT('cn.person.name') }}</div>
+    </Transition>
+    <Transition name="b" @before-enter="handleBeforEnter" @after-leave="handleAfterLeave">
       <div v-show="showName">{{ $myT('cn.person.name') }}</div>
     </Transition>
     <input type="text" v-focus:foo="`red`" />
@@ -48,9 +54,12 @@ const vFocus = {
 </template>
 
 <style scoped>
-.fade-enter-from,
-.fade-leave-to {
+.fade-enter-from {
   transform: translateX(-20px);
+  visibility: hidden;
+}
+.fade-leave-to {
+  transform: translateX(200px);
   visibility: hidden;
 }
 .fade-enter-active,
