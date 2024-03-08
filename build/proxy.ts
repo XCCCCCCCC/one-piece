@@ -21,6 +21,6 @@ export const returnProxy = (list: ProxyList): ProxyTargetList => {
 export const parseEnv = (envConfig: any) => {
   const { VITE_APP_PROXY } = envConfig
   return {
-    proxyConfig: JSON.parse(VITE_APP_PROXY)
+    proxyConfig: JSON.parse(VITE_APP_PROXY || '')
   }
 }

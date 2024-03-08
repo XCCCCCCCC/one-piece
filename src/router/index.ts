@@ -1,6 +1,8 @@
 import type { App } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import routeList from '@/router/routes'
 
 export const router = createRouter({
   // 创建一个hash历史记录。
@@ -18,7 +20,8 @@ export const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
-    }
+    },
+    ...(routeList as unknown as RouteRecordRaw[])
   ],
   // 是否应该禁止尾部斜杠
   strict: true,
